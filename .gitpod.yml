@@ -10,4 +10,5 @@ tasks:
   - name: Launch DevSpace
     command: |
       gp sync-await kubeconfig
+      devspace use namespace dev
       devspace dev
