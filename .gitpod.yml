@@ -1,1 +1,7 @@
-image: gingerich/gitpod-devspace:latest
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - before: doctl auth init --context gitpod --access-token $DO_API_KEY
+    init: doctl kubernetes cluster kubeconfig save $DO_CLUSTER_ID
+    command: devspace dev
