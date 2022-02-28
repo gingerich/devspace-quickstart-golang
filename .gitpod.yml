@@ -12,3 +12,7 @@ tasks:
       gp sync-await kubeconfig
       devspace use namespace dev
       devspace dev
+
+ports:
+  - port: 8080
+    onOpen: open-browser
