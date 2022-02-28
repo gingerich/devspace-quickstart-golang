@@ -2,6 +2,12 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - before: doctl auth init --context gitpod --access-token $DO_API_KEY
-    init: doctl kubernetes cluster kubeconfig save $DO_CLUSTER_ID
-    command: devspace dev
+  - name: Get kubeconfig from DO
+    command: |
+      doctl auth init --access-token $DO_API_KEY
+      doctl kubernetes cluster kubeconfig save $DO_CLUSTER_ID
+      gp sync-done kubeconfig
+  - name: Launch DevSpace
+    command: |
+      gp sync-await kubeconfig
+      devspace dev
